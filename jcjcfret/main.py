@@ -20,6 +20,16 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Hello world!')
 
+class SomethingHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('Something')
+
+class PieHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('I like pie')
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/something', SomethingHandler),
+    ('/pie', PieHandler)
 ], debug=True)
