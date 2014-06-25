@@ -19,3 +19,8 @@ form.add-answer {
 form.smaller{
 	width: 70%;
 }
+
+div.account-menu {
+	margin-top: 20px;
+	float: right;
+}

@@ -46,10 +46,14 @@ class MainHandler(webapp2.RequestHandler):
             user_profile.put()
 
         #render basic starting page
+
+        #
         
         template_values = {
-            "logout_url": users.create_logout_url("/")
+            "logout_url": users.create_logout_url("/"),
+            "user_profile": user_profile
         }
+
 
         template = JINJA_ENVIRONMENT.get_template('app.html')
         app_markup = template.render(template_values)
