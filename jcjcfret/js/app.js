@@ -1,4 +1,4 @@
-
+var SELECTED_QUESTION_ID = null;
 
 $(document).ready(function() {
 
@@ -50,6 +50,22 @@ $(document).ready(function() {
             dataType: "json"
         });
 
+    });
+
+    $("button.question_select").click(function(event) {
+
+        var cell_ = event.target.parentNode;
+
+        //update the question text
+        //add an id to the p inside the blockquote
+        //fetch the p inside the blockquote using document.getElementById
+        //get the text from the cell using getAttribute
+        //set the textContent of the p as the question text
+
+        //grab the id
+        SELECTED_QUESTION_ID = cell_.getAttribute("data-id");
+
+        //load the answers
     });
 
 });

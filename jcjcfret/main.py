@@ -108,3 +108,22 @@ class QuestionHandler(APIHandler):
 api = webapp2.WSGIApplication([
     ('/api/question', QuestionHandler)
 ], debug=True)
+
+"""
+class AnswerHandler(APIHandler):
+
+    def post(self):
+
+        request_body = self.request.body
+        request_body_json = json.loads(request_body)
+
+        question = models.Answ(
+            user_key = self.user_profile.key,
+            text = request_body_json["question_text"]
+        )
+        question.put()
+"""
+ 
+             
+
+

@@ -63,8 +63,8 @@
                         {% for question in questions %}
                         <tr>
                             <td>{{question.text}}</td>
-                            <td>
-                                <button type="button" class="btn btn-default "><span class="glyphicon glyphicon-circle-arrow-right"></span> </button>
+                            <td data-id="{{question.key.id()}}" data-value="{{question.text}}">
+                                <button type="button" class="question_select btn btn-default ">Select</button>
                                 <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
                             </td>
                         </tr>
