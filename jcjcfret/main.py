@@ -14,12 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import jinja2
+import os
 import webapp2
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
 import models
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -39,9 +46,14 @@ class MainHandler(webapp2.RequestHandler):
             user_profile.put()
 
         #render basic starting page
+        
+        template_values = {
+            "logout_url": users.create_logout_url("/")
+        }
 
-        self.response.write("<p>Hello: %s %s</p>" % (user_profile.first_name, user_profile.last_name))
-        self.response.write("<a href=\"%s\">Logout</a>" % users.create_logout_url("/"))
+        template = JINJA_ENVIRONMENT.get_template('app.html')
+        app_markup = template.render(template_values)
+        self.response.write(app_markup)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
