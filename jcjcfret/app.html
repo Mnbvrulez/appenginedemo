@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <script src ="/js/jquery-1.11.1.min.js"> </script>
     <script src ="/js/bootstrap.min.js"> </script>
+    <script src = "/js/app.js"> </script>
 </head>
 <body>
     <div class="container-fluid">
@@ -38,28 +39,25 @@
                     <thead>
                         <tr>
                             <th>Question</th>
-                            <th>No. of Answers</th>
                             <th>Actions</th>
                             
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="question_list">
                         <tr>
                             <td>To be or not to be?</td>
-                            <td>42</td>
                             <td>
                                 <button type="button" class="btn btn-default "><span class="glyphicon glyphicon-circle-arrow-right"></span> </button>
                                 <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
                             </td>
-                            
                         </tr>
                     </tbody>
 
                 </table>
 
                 <h3> Create a New Question </h3> 
-                <input type="text" class="form-control" placeholder="New Question Here">
-                <button type="button" class="btn btn-primary">Submit</button>
+                <input id="question_input" type="text" class="form-control" placeholder="New Question Here">
+                <button id="question_submit_button" type="button" class="btn btn-primary">Submit</button>
             </div>
             <div class="col-md-9">
                 <h2>Question</h2>

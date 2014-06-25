@@ -18,6 +18,10 @@ handlers:
 - url: /fonts
   static_dir: fonts
 
+- url: /api/.*
+  script: main.api
+  login: required
+
 - url: .*
   script: main.app
   login: required

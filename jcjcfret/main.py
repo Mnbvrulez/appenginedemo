@@ -15,6 +15,7 @@
 # limitations under the License.
 #
 import jinja2
+import json
 import os
 import webapp2
 
@@ -61,4 +62,33 @@ class MainHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
+], debug=True)
+
+class APIHandler(webapp2.RequestHandler):
+    
+    @property
+    def user_profile(self):
+        user = users.get_current_user()
+        user_profile_key = ndb.Key("UserProfile", user.user_id())
+
+        return user_profile_key.get()
+
+
+class QuestionHandler(APIHandler):
+
+    def post(self):
+
+        request_body = self.request.body
+        request_body_json = json.loads(request_body)
+
+        question = models.Question(
+            user_key = self.user_profile.key,
+            text = request_body_json["question_text"]
+        )
+        question.put()
+
+        self.response.write("{\"question_id\": \"%i\"}" % question.key.id())
+
+api = webapp2.WSGIApplication([
+    ('/api/question', QuestionHandler)
 ], debug=True)
