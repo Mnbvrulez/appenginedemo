@@ -3,22 +3,27 @@ from google.appengine.ext import ndb
 class UserProfile(ndb.Model):
     user = ndb.UserProperty()
     admin = ndb.BooleanProperty(required=True, default=False)
-    first_name = ndb.StringProperty(required=True, default="John")
-    last_name = ndb.StringProperty(required=True, default="Doe")
+    first_name = ndb.StringProperty(required=True, default="Anonymous")
+    last_name = ndb.StringProperty(required=True, default="User")
 
 #Question
 class Question(ndb.Model):
-    text = ndb.StringProperty(required=True, default="")
-    key = user
-    date = ndb.auto_now_add(required =True)
+    user_key = ndb.KeyProperty(kind=UserProfile, required=True)
+
+    text = ndb.StringProperty(required=True)
+    created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)
 
 #Answer
 class Answer(ndb.Model):
-    text = ndb.StringProperty(required=True, default = "")
-    key = user
-    date = ndb.auto_now_add(required=True)
+    question_key = ndb.KeyProperty(kind=Question, required=True)
+    user_key = ndb.KeyProperty(kind=UserProfile, required=True)
+
+    text = ndb.StringProperty(required=True)
+    created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)
 
 #Vote
 class Vote(ndb.Model):
-    key = user
-    number = ndb.IntegerProperty(required = True, default =0) 
+    user_key = ndb.KeyProperty(kind=UserProfile, required=True)
+    
+    number = ndb.IntegerProperty(required = True, default =0)
+    created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)

@@ -16,20 +16,33 @@
 #
 import webapp2
 
+from google.appengine.api import users
+from google.appengine.ext import ndb
+
+import models
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world!')
 
-class SomethingHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write('Something')
+        #fetch current user and make a user profile key
+        user = users.get_current_user()
+        user_profile_key = ndb.Key("UserProfile", user.user_id())
 
-class PieHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write('I like pie')
+        user_profile = user_profile_key.get()
+        #user profile doesn't exist so we will create one
+        if user_profile is None:
+            user_profile = models.UserProfile(
+                key = user_profile_key,
+                user = user
+            )
+
+            user_profile.put()
+
+        #render basic starting page
+
+        self.response.write("<p>Hello: %s %s</p>" % (user_profile.first_name, user_profile.last_name))
+        self.response.write("<a href=\"%s\">Logout</a>" % users.create_logout_url("/"))
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/something', SomethingHandler),
-    ('/pie', PieHandler)
+    ('/', MainHandler)
 ], debug=True)
