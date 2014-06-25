@@ -12,10 +12,6 @@ div {
 }
 */
 
-form.add-answer {
-	width: 70%;
-}
-
 form.smaller{
 	width: 70%;
 }
@@ -23,4 +19,16 @@ form.smaller{
 div.account-menu {
 	margin-top: 20px;
 	float: right;
+}
+
+blockquote.question {
+	float: left;
+}
+
+button#publish_question {
+	float: right;
+}
+
+form.answer h4 {
+	clear: both;
 }

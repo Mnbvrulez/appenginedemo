@@ -52,7 +52,8 @@ class MainHandler(webapp2.RequestHandler):
         
         template_values = {
             "logout_url": users.create_logout_url("/"),
-            "user_profile": user_profile
+            "user_profile": user_profile,
+            "questions": models.Question.query().order(-models.Question.created_date)
         }
 
 

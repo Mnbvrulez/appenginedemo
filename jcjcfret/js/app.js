@@ -42,7 +42,7 @@ $(document).ready(function() {
 
                 //add the question element to the UI
                 var questionList_ = document.getElementById("question_list");
-                questionList_.appendChild(questionRow_);
+                questionList_.insertBefore(questionRow_, questionList_.firstChild);
             },
             error: function() {
                 console.log("question submit failed");

@@ -13,6 +13,9 @@ class Question(ndb.Model):
     text = ndb.StringProperty(required=True)
     created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)
 
+    published = ndb.BooleanProperty(required=True, default=False)
+    published_date = ndb.DateTimeProperty(required=False)
+
 #Answer
 class Answer(ndb.Model):
     question_key = ndb.KeyProperty(kind=Question, required=True)
