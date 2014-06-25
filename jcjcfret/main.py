@@ -29,8 +29,12 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-class MainHandler(webapp2.RequestHandler):
+class RedirectHandler(webapp2.RequestHandler):
     def get(self):
+        self.redirect("/top")
+
+class MainHandler(webapp2.RequestHandler):
+    def get(self, question_filter):
 
         #fetch current user and make a user profile key
         user = users.get_current_user()
@@ -46,14 +50,24 @@ class MainHandler(webapp2.RequestHandler):
 
             user_profile.put()
 
-        #render basic starting page
+        #adjust the questions based on the filter
+        questions = models.Question.query()
 
-        #
-        
+        if question_filter == "top":
+            pass
+        elif question_filter == "new":
+            questions = questions.filter(models.Question.published==True).order(-models.Question.published_date)
+        elif question_filter == "me":
+            questions = questions.filter(models.Question.published==True, models.Question.user_key==user_profile.key).order(-models.Question.published_date)
+        elif question_filter == "draft":
+            questions = questions.filter(models.Question.published==False, models.Question.user_key==user_profile.key).order(-models.Question.created_date)
+
+
         template_values = {
             "logout_url": users.create_logout_url("/"),
             "user_profile": user_profile,
-            "questions": models.Question.query().order(-models.Question.created_date)
+            "question_filter": question_filter,
+            "questions": questions
         }
 
 
@@ -62,7 +76,8 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(app_markup)
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', RedirectHandler),
+    ('/(top|new|me|draft)', MainHandler)
 ], debug=True)
 
 class APIHandler(webapp2.RequestHandler):

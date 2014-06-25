@@ -30,10 +30,26 @@
             <div class="col-md-3">
                 <h3> List of Questions  </h3> 
                 <div class="btn-group">
-                    <a href="/account" class="btn btn-default">Top Answered</a>
-                    <a href="/account" class="btn btn-default">Newest</a>
-                    <a href="{{logout_url}}" class="btn btn-default">My Questions</a>
-                    <a href="{{logout_url}}" class="btn btn-default">My Drafts</a>
+                    {% if question_filter == "top" %}
+                        <a href="/top" class="btn btn-default btn-primary">Top Answered</a>
+                    {% else %}
+                        <a href="/top" class="btn btn-default">Top Answered</a>
+                    {% endif %}
+                    {% if question_filter == "new" %}
+                        <a href="/new" class="btn btn-default btn-primary">Newest</a>
+                    {% else%}
+                        <a href="/new" class="btn btn-default">Newest</a>
+                    {% endif %}
+                    {% if question_filter == "me" %}
+                        <a href="/me" class="btn btn-default btn-primary">My Questions</a>
+                    {%else%}
+                        <a href="/me" class="btn btn-default">My Questions</a>
+                    {% endif %}
+                    {% if question_filter == "draft" %}
+                        <a href="/draft" class="btn btn-default btn-primary">My Drafts</a>
+                    {% else%}
+                        <a href="/draft" class="btn btn-default">My Draft</a>
+                    {% endif %}
                 </div>
                 <table class="table table-striped">
                     <thead>
