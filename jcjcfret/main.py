@@ -121,18 +121,27 @@ class QuestionDelete(APIHandler):
 class AnswerCreate(APIHandler):
 
     def post(self, question_id):
-        """
+
+
         request_body = self.request.body
         request_body_json = json.loads(request_body)
 
-        question = models.Answ(
-            user_key = self.user_profile.key,
-            text = request_body_json["question_text"]
-        )
-        question.put()
-        """
+        #check that question exists
+        question_key = ndb.Key("Question", int(question_id))
+        question = question_key.get()
+        if question is None:
+            self.response.status = "404 Not Found"
+            return
 
-        self.response.write("{}")
+        answer = models.Answer(
+            user_key = self.user_profile.key,
+            question_key=question.key,
+            text = request_body_json["answer_text"],
+            comment = request_body_json["answer_comment"]
+        )
+        answer.put()
+        
+        self.response.write("{\"answer_id\": \"%i\"}" % answer.key.id())
 
 api = webapp2.WSGIApplication([
     ('/api/question', QuestionCreate),
