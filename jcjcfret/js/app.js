@@ -1,3 +1,42 @@
+function createAnswerElement(id, text, comment) {
+
+    console.log(id, text, comment);
+
+    /*
+    <tr>
+        <td width=8.5%>#1</td>
+        <td width=8.5%>232</td>
+        <td width=20%>Image Preview</td>
+        <td width=40%>Answer</td>
+        <td>
+            <button type="button" class="btn btn-primary">Vote</button>
+            <a class="btn btn-default" href="#" role="button">View Comments</a>
+            <button type="button" class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+    */
+
+    var answerRow_ = document.createElement("tr");
+
+    var answerRank_ = document.createElement("td");
+    answerRow_.appendChild(answerRank_);
+
+    var answerVotes_ = document.createElement("td");
+    answerRow_.appendChild(answerVotes_);
+
+    var answerImg_ = document.createElement("td");
+    answerRow_.appendChild(answerImg_);
+
+    var answerText_ = document.createElement("td");
+    answerText_.textContent = text;
+    answerRow_.appendChild(answerText_);
+
+    var answerActions_ = document.createElement("td");
+    answerRow_.appendChild(answerActions_); 
+
+    return answerRow_;
+};
+
 function selectQuestion() {
 
     //fetch the p inside the blockquote using document.getElementById
@@ -12,25 +51,12 @@ function selectQuestion() {
         url: "/api/question/"+SELECTED_QUESTION_ID+"/answer",
         success: function(data, textStatus, jqXHR) {
 
-            /*
-            <tr>
-                <td width=8.5%>#1</td>
-                <td width=8.5%>232</td>
-                <td width=20%>Image Preview</td>
-                <td width=40%>Answer</td>
-                <td>
-                    <button type="button" class="btn btn-primary">Vote</button>
-                    <a class="btn btn-default" href="#" role="button">View Comments</a>
-                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                </td>
-            </tr>
-            */
-
             for(var index = 0; index < data.length; index++) {
                 var answer_ = data[index];
-                console.log(answer_["answer_text"]);
 
-                
+                var answerRow_ = createAnswerElement(answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"]);
+                var answerList_ = document.getElementById("answer_list");
+                answerList_.appendChild(answerRow_);
             }
         }, 
         error: function() {
@@ -38,9 +64,7 @@ function selectQuestion() {
         },
         dataType: "json"
     }); 
-}
-    
-
+};
 
 $(document).ready(function() {
 
@@ -156,24 +180,9 @@ $(document).ready(function() {
             data: JSON.stringify(answer_),
             success: function(data, textStatus, jqXHR) {
 
-                var answerRow_ = document.createElement("tr");
+                var answerId_ = data["answer_id"];
 
-                var answerRank_ = document.createElement("td");
-                answerRow_.appendChild(answerRank_);
-
-                var answerVotes_ = document.createElement("td");
-                answerRow_.appendChild(answerVotes_);
-
-                var answerImg_ = document.createElement("td");
-                answerRow_.appendChild(answerImg_);
-          
-                var answerText_ = document.createElement("td");
-                answerText_.textContent = answerInput_.value;
-                answerRow_.appendChild(answerText_);
-
-                var answerActions_ = document.createElement("td");
-                answerRow_.appendChild(answerActions_);
-
+                var answerRow_ = createAnswerElement(answerId_, answerInput_.value, answerComment.value);
                 var answerList_ = document.getElementById("answer_list");
                 answerList_.appendChild(answerRow_);
 
