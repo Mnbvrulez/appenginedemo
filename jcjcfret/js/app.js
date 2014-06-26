@@ -1,4 +1,4 @@
-function createAnswerElement(id, text, comment,) {
+function createAnswerElement(id, text, comment) {
 
     console.log(id, text, comment);
 
@@ -25,7 +25,6 @@ function createAnswerElement(id, text, comment,) {
         }})
 
     */
-    "class": 'test',
 
 
     var answerRow_ = document.createElement("tr");
@@ -46,15 +45,23 @@ function createAnswerElement(id, text, comment,) {
     var answerActions_ = document.createElement("td");
     answerRow_.appendChild(answerActions_); 
 
-    var answerVote_ = document.createElement("button", {
-        "class": 'btn' 'btn-primary'
-    })
-    answerActions_.appendChild(answerVotes_);
+    var answerVote_ = document.createElement("button");
+    answerVote_.classList.add("btn");
+    answerVote_.classList.add("btn-primary");
+    answerVote_.textContent = "Vote";
+    answerActions_.appendChild(answerVote_);
 
-    var answerComments_ = document.createElement(????)
+
+    var answerComments_ = document.createElement("button");
+    answerComments_.classList.add("btn");
+    answerComments_.classList.add("btn-default");
+    answerComments_.textContent = "Comments";
     answerActions_.appendChild(answerComments_);
 
-    var answerDelete_ = document.createElement(????)
+    var answerDelete_ = document.createElement("button");
+    answerDelete_.classList.add("btn");
+    answerDelete_.classList.add("btn-danger");
+    answerDelete_.textContent = "Delete";
     answerActions_.appendChild(answerDelete_);
 
 
