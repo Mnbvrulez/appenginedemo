@@ -57,10 +57,16 @@ $(document).ready(function() {
         var cell_ = event.target.parentNode;
 
         //update the question text
-        //add an id to the p inside the blockquote
-        //fetch the p inside the blockquote using document.getElementById
+        
         //get the text from the cell using getAttribute
+        var questionText_ = cell_.getAttribute("data-value");
+        console.log(questionText_);
+        
+        //fetch the p inside the blockquote using document.getElementById
+        var questionTextElement_ = document.getElementById("selected_question_text");
+
         //set the textContent of the p as the question text
+        questionTextElement_.textContent = questionText_; 
 
         //grab the id
         SELECTED_QUESTION_ID = cell_.getAttribute("data-id");
