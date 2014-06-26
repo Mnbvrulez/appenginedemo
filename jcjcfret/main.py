@@ -122,7 +122,27 @@ class AnswerCollection(APIHandler):
 
     def get(self, question_id):
 
-        self.response.write("[]")
+        question_key = ndb.Key("Question", int(question_id))
+        question = question_key.get()
+        if question is None:
+            self.response.status = "404 Not Found"
+            return
+
+        answers = models.Answer.query().filter(models.Answer.question_key==question.key)
+
+        #TODO: Order answers by votes
+
+        answer_objects = list()
+        for answer in answers:
+
+            answer_object = {
+                "answer_id": answer.key.id(),
+                "answer_text": answer.text,
+                "answer_comment": answer.comment
+            }
+            answer_objects.append(answer_object)
+
+        self.response.write(json.dumps(answer_objects))
 
     def post(self, question_id):
 

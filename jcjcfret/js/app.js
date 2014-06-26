@@ -11,7 +11,27 @@ function selectQuestion() {
         type: "GET",
         url: "/api/question/"+SELECTED_QUESTION_ID+"/answer",
         success: function(data, textStatus, jqXHR) {
-            console.log("Success");
+
+            /*
+            <tr>
+                <td width=8.5%>#1</td>
+                <td width=8.5%>232</td>
+                <td width=20%>Image Preview</td>
+                <td width=40%>Answer</td>
+                <td>
+                    <button type="button" class="btn btn-primary">Vote</button>
+                    <a class="btn btn-default" href="#" role="button">View Comments</a>
+                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
+                </td>
+            </tr>
+            */
+
+            for(var index = 0; index < data.length; index++) {
+                var answer_ = data[index];
+                console.log(answer_["answer_text"]);
+
+                
+            }
         }, 
         error: function() {
             console.log("something didn't work");
