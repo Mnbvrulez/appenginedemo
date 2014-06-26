@@ -77,7 +77,7 @@ class MainHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', RedirectHandler),
-    ('/(top|new|me|draft)', MainHandler)
+    ('/(top|new|me|draft)', MainHandler),
 ], debug=True)
 
 class APIHandler(webapp2.RequestHandler):
@@ -105,8 +105,21 @@ class QuestionHandler(APIHandler):
 
         self.response.write("{\"question_id\": \"%i\"}" % question.key.id())
 
+class QuestionDeleteHandler(APIHandler):
+
+    def delete(self, question_id):
+        
+        question_key = ndb.Key("Question", int(question_id))
+        question = question_key.get()
+        if question is None:
+            self.response.status = "404 Not Found"
+            return
+
+        question_key.delete()
+
 api = webapp2.WSGIApplication([
-    ('/api/question', QuestionHandler)
+    ('/api/question', QuestionHandler),
+    ('/api/question/([0-9]+)', QuestionDeleteHandler)
 ], debug=True)
 
 """

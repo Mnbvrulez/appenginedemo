@@ -78,6 +78,32 @@ $(document).ready(function() {
         selectQuestion();
     });
 
+    $("button.question_delete").click(function(event) {
+
+        var cell_ = event.target.parentNode;
+        var questionId_ = cell_.getAttribute("data-id");
+
+        $.ajax({
+            type: "DELETE",
+            url: "/api/question/"+questionId_,
+            contentType: "application/json; charset=utf-8",
+            success: function(data, textStatus, jqXHR) {
+
+                //get rid of the question row
+                var questionRow_ = cell_.parentNode;
+                var questionList_ = questionRow_.parentNode;
+                questionList_.removeChild(questionRow_);
+
+                //if this row was select, select a new question
+                
+
+            },
+            error: function() {
+                console.log("question question failed");
+            }
+        });
+    });
+
     //perform first load
     if(SELECTED_QUESTION_ID != null) {
         selectQuestion();
