@@ -22,6 +22,7 @@ class Answer(ndb.Model):
     user_key = ndb.KeyProperty(kind=UserProfile, required=True)
 
     text = ndb.StringProperty(required=True)
+    comment = ndb.TextProperty(required=False)
     created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)
 
 #Vote

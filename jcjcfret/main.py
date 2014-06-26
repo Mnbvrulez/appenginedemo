@@ -90,7 +90,7 @@ class APIHandler(webapp2.RequestHandler):
         return user_profile_key.get()
 
 
-class QuestionHandler(APIHandler):
+class QuestionCreate(APIHandler):
 
     def post(self):
 
@@ -105,7 +105,7 @@ class QuestionHandler(APIHandler):
 
         self.response.write("{\"question_id\": \"%i\"}" % question.key.id())
 
-class QuestionDeleteHandler(APIHandler):
+class QuestionDelete(APIHandler):
 
     def delete(self, question_id):
         
@@ -117,16 +117,12 @@ class QuestionDeleteHandler(APIHandler):
 
         question_key.delete()
 
-api = webapp2.WSGIApplication([
-    ('/api/question', QuestionHandler),
-    ('/api/question/([0-9]+)', QuestionDeleteHandler)
-], debug=True)
 
-"""
-class AnswerHandler(APIHandler):
+class AnswerCreate(APIHandler):
 
-    def post(self):
-
+    def post(self, question_id):
+        pass
+        """
         request_body = self.request.body
         request_body_json = json.loads(request_body)
 
@@ -135,7 +131,13 @@ class AnswerHandler(APIHandler):
             text = request_body_json["question_text"]
         )
         question.put()
-"""
+        """
+
+api = webapp2.WSGIApplication([
+    ('/api/question', QuestionCreate),
+    ('/api/question/([0-9]+)', QuestionDelete),
+    ('/api/question/([0-9]+)/answer', AnswerCreate)
+], debug=True)
  
              
 
