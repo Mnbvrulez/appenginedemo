@@ -1,4 +1,4 @@
-function createAnswerElement(id, text, comment) {
+function createAnswerElement(id, text, comment,) {
 
     console.log(id, text, comment);
 
@@ -14,7 +14,19 @@ function createAnswerElement(id, text, comment) {
             <button type="button" class="btn btn-danger">Delete</button>
         </td>
     </tr>
+
+
+    $('<div />', {
+        "class": 'test',
+        text: "a div",
+        click: function(e){
+            e.preventDefault();
+            alert("test")
+        }})
+
     */
+    "class": 'test',
+
 
     var answerRow_ = document.createElement("tr");
 
@@ -33,6 +45,18 @@ function createAnswerElement(id, text, comment) {
 
     var answerActions_ = document.createElement("td");
     answerRow_.appendChild(answerActions_); 
+
+    var answerVote_ = document.createElement("button", {
+        "class": 'btn' 'btn-primary'
+    })
+    answerActions_.appendChild(answerVotes_);
+
+    var answerComments_ = document.createElement(????)
+    answerActions_.appendChild(answerComments_);
+
+    var answerDelete_ = document.createElement(????)
+    answerActions_.appendChild(answerDelete_);
+
 
     return answerRow_;
 };
