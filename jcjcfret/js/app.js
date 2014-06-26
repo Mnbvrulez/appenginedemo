@@ -2,31 +2,6 @@ function createAnswerElement(id, text, comment) {
 
     console.log(id, text, comment);
 
-    /*
-    <tr>
-        <td width=8.5%>#1</td>
-        <td width=8.5%>232</td>
-        <td width=20%>Image Preview</td>
-        <td width=40%>Answer</td>
-        <td>
-            <button type="button" class="btn btn-primary">Vote</button>
-            <a class="btn btn-default" href="#" role="button">View Comments</a>
-            <button type="button" class="btn btn-danger">Delete</button>
-        </td>
-    </tr>
-
-
-    $('<div />', {
-        "class": 'test',
-        text: "a div",
-        click: function(e){
-            e.preventDefault();
-            alert("test")
-        }})
-
-    */
-
-
     var answerRow_ = document.createElement("tr");
 
     var answerRank_ = document.createElement("td");
@@ -76,6 +51,12 @@ function selectQuestion() {
     //set the textContent of the p as the question text
     questionTextElement_.textContent = SELECTED_QUESTION_TEXT;
 
+    //clean up existing answers
+    var answerList_ = document.getElementById("answer_list");
+    while (answerList_.firstChild) {
+        answerList_.removeChild(answerList_.firstChild);
+    }
+
     //load the answers
     $.ajax({
         type: "GET",
@@ -86,7 +67,6 @@ function selectQuestion() {
                 var answer_ = data[index];
 
                 var answerRow_ = createAnswerElement(answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"]);
-                var answerList_ = document.getElementById("answer_list");
                 answerList_.appendChild(answerRow_);
             }
         }, 
