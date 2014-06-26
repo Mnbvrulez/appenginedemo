@@ -1,13 +1,28 @@
-var SELECTED_QUESTION_ID = null;
+function selectQuestion() {
+
+    //fetch the p inside the blockquote using document.getElementById
+    var questionTextElement_ = document.getElementById("selected_question_text");
+
+    //set the textContent of the p as the question text
+    questionTextElement_.textContent = SELECTED_QUESTION_TEXT;
+
+    //load the answers
+
+
+};
 
 $(document).ready(function() {
 
-    $("#question_submit_button").click(function() {
+    $("#question_submit_button").click(function(event) {
         
+        var questionSubmitButton_ = event.target;
         var questionInput_ = document.getElementById("question_input");
         var data = {
             "question_text": questionInput_.value
         }
+
+        questionSubmitButton_.setAttribute("disabled", "disabled");
+        questionInput_.setAttribute("disabled", "disabled");
 
         $.ajax({
             type: "POST",
@@ -15,34 +30,33 @@ $(document).ready(function() {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             success: function(data, textStatus, jqXHR) {
-                console.log("question added");
-                console.log(data);
 
-                //unpack the id
-                var questionId_ = data["question_id"];
+                //only run if on our drafts page
+                if(QUESTION_FILTER == "draft") {
+                    //unpack the id
+                    var questionId_ = data["question_id"];
 
-                //create a question element
-                /*
-                <tr>
-                    <td>To be or not to be?</td>
-                    <td>
-                        <button type="button" class="btn btn-default "><span class="glyphicon glyphicon-circle-arrow-right"></span> </button>
-                        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> </button>
-                    </td>
-                </tr>
-                */
-                var questionRow_ = document.createElement("tr");
+                    //create a question element
+                    var questionRow_ = document.createElement("tr");
                 
-                var questionText_ = document.createElement("td");
-                questionText_.textContent = questionInput_.value;
-                questionRow_.appendChild(questionText_);
+                    var questionText_ = document.createElement("td");
+                    questionText_.textContent = questionInput_.value;
+                    questionRow_.appendChild(questionText_);
 
-                var actions_ = document.createElement("td");
-                questionRow_.appendChild(actions_);
+                    var actions_ = document.createElement("td");
+                    questionRow_.appendChild(actions_);
 
-                //add the question element to the UI
-                var questionList_ = document.getElementById("question_list");
-                questionList_.insertBefore(questionRow_, questionList_.firstChild);
+                    //add the question element to the UI
+                    var questionList_ = document.getElementById("question_list");
+                    questionList_.insertBefore(questionRow_, questionList_.firstChild);
+
+                    SELECTED_QUESTION_ID = questionId_;
+                    SELECTED_QUESTION_TEXT = questionInput_.value;
+                }
+
+                questionInput_.value = "";
+                questionSubmitButton_.removeAttribute("disabled");
+                questionInput_.removeAttribute("disabled");
             },
             error: function() {
                 console.log("question submit failed");
@@ -55,25 +69,16 @@ $(document).ready(function() {
     $("button.question_select").click(function(event) {
 
         var cell_ = event.target.parentNode;
-
-        //update the question text
-        
-        //get the text from the cell using getAttribute
-        var questionText_ = cell_.getAttribute("data-value");
-        console.log(questionText_);
-        
-        //fetch the p inside the blockquote using document.getElementById
-        var questionTextElement_ = document.getElementById("selected_question_text");
-
-        //set the textContent of the p as the question text
-        questionTextElement_.textContent = questionText_; 
-
         //grab the id
         SELECTED_QUESTION_ID = cell_.getAttribute("data-id");
+        SELECTED_QUESTION_TEXT = cell_.getAttribute("data-value");
 
-        //load the answers
+        selectQuestion();
     });
 
-});
+    //perform first load
+    if(SELECTED_QUESTION_ID != null) {
+        selectQuestion();
+    }
 
-//text = request_body_json["question_text"]
+});

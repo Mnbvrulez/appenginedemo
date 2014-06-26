@@ -33,5 +33,7 @@ form.answer h4 {
 	clear: both;
 }
 
-#questionQuote_
+div.question_create {
+	margin-bottom: 20px;
+}
 
