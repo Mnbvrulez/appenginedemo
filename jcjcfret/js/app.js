@@ -52,6 +52,8 @@ $(document).ready(function() {
 
                     SELECTED_QUESTION_ID = questionId_;
                     SELECTED_QUESTION_TEXT = questionInput_.value;
+
+                    selectQuestion();
                 }
 
                 questionInput_.value = "";
