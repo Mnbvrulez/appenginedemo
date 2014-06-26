@@ -121,7 +121,6 @@ class QuestionDelete(APIHandler):
 class AnswerCreate(APIHandler):
 
     def post(self, question_id):
-        pass
         """
         request_body = self.request.body
         request_body_json = json.loads(request_body)
@@ -132,6 +131,8 @@ class AnswerCreate(APIHandler):
         )
         question.put()
         """
+
+        self.response.write("{}")
 
 api = webapp2.WSGIApplication([
     ('/api/question', QuestionCreate),

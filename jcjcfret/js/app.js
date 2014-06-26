@@ -107,7 +107,7 @@ $(document).ready(function() {
         });
     });
 
-      $("#answer_submit_button").click(function(event) {
+    $("#answer_submit_button").click(function(event) {
         
         var answerSubmitButton_ = event.target;
         var answerInput_ = document.getElementById("submit_answer_text");
@@ -116,17 +116,50 @@ $(document).ready(function() {
             "answer_text": answerInput_.value,
             "answer_comment": answerComment.value
         }
-        console.log(answer_);
 
-        /*
-        answer_submit_button.setAttribute("disabled", "disabled");
+        answerSubmitButton_.setAttribute("disabled", "disabled");
         answerInput_.setAttribute("disabled", "disabled");
-        console.log(answer_submit_button);
 
-        */
-        
+        $.ajax({
+            type: "POST",
+            url: "/api/question/"+SELECTED_QUESTION_ID+"/answer",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(answer_),
+            success: function(data, textStatus, jqXHR) {
 
-    }); 
+                var answerRow_ = document.createElement("tr");
+
+                var answerRank_ = document.createElement("td");
+                answerRow_.appendChild(answerRank_);
+
+                var answerVotes_ = document.createElement("td");
+                answerRow_.appendChild(answerVotes_);
+
+                var answerImg_ = document.createElement("td");
+                answerRow_.appendChild(answerImg_);
+          
+                var answerText_ = document.createElement("td");
+                answerText_.textContent = answerInput_.value;
+                answerRow_.appendChild(answerText_);
+
+                var answerActions_ = document.createElement("td");
+                answerRow_.appendChild(answerActions_);
+
+                var answerList_ = document.getElementById("answer_list");
+                answerList_.appendChild(answerRow_);
+
+                answerInput_.value = "";
+                answerComment.value = "";
+                answerSubmitButton_.removeAttribute("disabled");
+                answerInput_.removeAttribute("disabled");
+            },
+            error: function() {
+                console.log("answer submit failed");
+            },
+            dataType: "json"
+        });
+
+    });
 
     //perform first load
     if(SELECTED_QUESTION_ID != null) {
