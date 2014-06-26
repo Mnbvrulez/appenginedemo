@@ -6,6 +6,8 @@ function selectQuestion() {
     //set the textContent of the p as the question text
     questionTextElement_.textContent = SELECTED_QUESTION_TEXT;
 
+    
+
     //load the answers
 
 
@@ -67,6 +69,7 @@ $(document).ready(function() {
         });
 
     });
+    
 
     $("button.question_select").click(function(event) {
 
@@ -95,7 +98,7 @@ $(document).ready(function() {
                 questionList_.removeChild(questionRow_);
 
                 //if this row was select, select a new question
-                
+
 
             },
             error: function() {
@@ -103,6 +106,27 @@ $(document).ready(function() {
             }
         });
     });
+
+      $("#answer_submit_button").click(function(event) {
+        
+        var answerSubmitButton_ = event.target;
+        var answerInput_ = document.getElementById("submit_answer_text");
+        var answerComment = document.getElementById("submit_comment");
+        var answer_ = {
+            "answer_text": answerInput_.value,
+            "answer_comment": answerComment.value
+        }
+        console.log(answer_);
+
+        /*
+        answer_submit_button.setAttribute("disabled", "disabled");
+        answerInput_.setAttribute("disabled", "disabled");
+        console.log(answer_submit_button);
+
+        */
+        
+
+    }); 
 
     //perform first load
     if(SELECTED_QUESTION_ID != null) {
