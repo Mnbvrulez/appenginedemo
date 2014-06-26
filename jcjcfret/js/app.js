@@ -6,12 +6,21 @@ function selectQuestion() {
     //set the textContent of the p as the question text
     questionTextElement_.textContent = SELECTED_QUESTION_TEXT;
 
+    //load the answers
+    $.ajax({
+        type: "GET",
+        url: "/api/question/"+SELECTED_QUESTION_ID+"/answer",
+        success: function(data, textStatus, jqXHR) {
+            console.log("Success");
+        }, 
+        error: function() {
+            console.log("something didn't work");
+        },
+        dataType: "json"
+    }); 
+}
     
 
-    //load the answers
-
-
-};
 
 $(document).ready(function() {
 

@@ -118,7 +118,11 @@ class QuestionDelete(APIHandler):
         question_key.delete()
 
 
-class AnswerCreate(APIHandler):
+class AnswerCollection(APIHandler):
+
+    def get(self, question_id):
+
+        self.response.write("[]")
 
     def post(self, question_id):
 
@@ -146,7 +150,7 @@ class AnswerCreate(APIHandler):
 api = webapp2.WSGIApplication([
     ('/api/question', QuestionCreate),
     ('/api/question/([0-9]+)', QuestionDelete),
-    ('/api/question/([0-9]+)/answer', AnswerCreate)
+    ('/api/question/([0-9]+)/answer', AnswerCollection)
 ], debug=True)
  
              
