@@ -1,13 +1,15 @@
-function createAnswerElement(id, text, comment) {
+function createAnswerElement(rank, id, text, comment) {
 
     console.log(id, text, comment);
 
     var answerRow_ = document.createElement("tr");
 
     var answerRank_ = document.createElement("td");
+    answerRank_.textContent = "#"+rank;
     answerRow_.appendChild(answerRank_);
 
     var answerVotes_ = document.createElement("td");
+    answerVotes_.textContent = "0";
     answerRow_.appendChild(answerVotes_);
 
     var answerImg_ = document.createElement("td");
@@ -28,24 +30,21 @@ function createAnswerElement(id, text, comment) {
     answerVote_.textContent = "Vote";
     answerActions_.appendChild(answerVote_);
 
-    answerVote_.addEventListener('click', function(event) { 
-        console.log(id);
+    answerVote_.addEventListener('click', function(event) {
+
         $.ajax({
-        type: "POST",
-        url: "/api/question/"+SELECTED_QUESTION_ID+"/answer"+id +"/vote",
-        success: function(data, textStatus, jqXHR) {
-            console.log(id);
-            
+            type: "POST",
+            url: "/api/question/"+SELECTED_QUESTION_ID+"/answer/"+id +"/vote",
+            success: function(data, textStatus, jqXHR) {
+                
+
+
             }, 
-        error: function() {
-            console.log("something didn't work");
-            },
-        dataType: "json"
-           }) 
-});
-
-      
-
+            error: function() {
+                console.log("something didn't work");
+            }
+        }) 
+    });
 
     var answerComments_ = document.createElement("button");
     answerComments_.classList.add("btn");
@@ -102,7 +101,7 @@ function selectQuestion() {
             for(var index = 0; index < data.length; index++) {
                 var answer_ = data[index];
 
-                var answerRow_ = createAnswerElement(answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"]);
+                var answerRow_ = createAnswerElement(index+1, answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"]);
                 answerList_.appendChild(answerRow_);
             }
         }, 
@@ -230,8 +229,10 @@ $(document).ready(function() {
 
                 var answerId_ = data["answer_id"];
 
-                var answerRow_ = createAnswerElement(answerId_, answerInput_.value, answerComment.value);
+
                 var answerList_ = document.getElementById("answer_list");
+                var rank_ = answerList_.childNodes.length + 1;
+                var answerRow_ = createAnswerElement(rank_, answerId_, answerInput_.value, answerComment.value);
                 answerList_.appendChild(answerRow_);
 
                 answerInput_.value = "";

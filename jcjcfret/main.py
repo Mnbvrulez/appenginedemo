@@ -184,17 +184,18 @@ class QuestionPublish(APIHandler):
         question.published = True
         question.put()
 
+class Vote(APIHandler):
 
-
-
-
+     def post(self, question_id, answer_id):
+        pass
 
 
 api = webapp2.WSGIApplication([
     ('/api/question', QuestionCreate),
     ('/api/question/([0-9]+)', QuestionDelete),
     ('/api/question/([0-9]+)/answer', AnswerCollection),
-    ('/api/question/([0-9]+)/publish', QuestionPublish)
+    ('/api/question/([0-9]+)/publish', QuestionPublish),
+    ('/api/question/([0-9]+)/answer/([0-9]+)/vote', Vote)
 
 ], debug=True)
  
