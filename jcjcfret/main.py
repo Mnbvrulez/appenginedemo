@@ -55,7 +55,7 @@ class MainHandler(webapp2.RequestHandler):
         questions = models.Question.query()
 
         if question_filter == "top":
-            pass
+             questions = questions.filter(models.Question.published==True)
         elif question_filter == "new":
             questions = questions.filter(models.Question.published==True).order(-models.Question.published_date)
         elif question_filter == "me":
@@ -183,7 +183,7 @@ class QuestionPublish(APIHandler):
         question.published_date = datetime.now()
         question.published = True
         question.put()
-        
+
 
 
 
