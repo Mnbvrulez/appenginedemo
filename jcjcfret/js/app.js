@@ -1,4 +1,4 @@
-function createAnswerElement(rank, id, text, comment) {
+function createAnswerElement(rank, id, text, comment, votes) {
 
     console.log(id, text, comment);
 
@@ -9,7 +9,7 @@ function createAnswerElement(rank, id, text, comment) {
     answerRow_.appendChild(answerRank_);
 
     var answerVotes_ = document.createElement("td");
-    answerVotes_.textContent = "0";
+    answerVotes_.textContent = votes;
     answerRow_.appendChild(answerVotes_);
 
     var answerImg_ = document.createElement("td");
@@ -37,7 +37,15 @@ function createAnswerElement(rank, id, text, comment) {
             url: "/api/question/"+SELECTED_QUESTION_ID+"/answer/"+id +"/vote",
             success: function(data, textStatus, jqXHR) {
                 
+                //hide all answer buttons
+                $("button.vote_btn").each(function() {
+                    $(this).css("visibility", "hidden");
+                });
 
+                //increment the vote
+                var votes_ = answerVotes_.textContent;
+                votes_++;
+                answerVotes_.textContent = votes_;
 
             }, 
             error: function() {
@@ -101,7 +109,7 @@ function selectQuestion() {
             for(var index = 0; index < data.length; index++) {
                 var answer_ = data[index];
 
-                var answerRow_ = createAnswerElement(index+1, answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"]);
+                var answerRow_ = createAnswerElement(index+1, answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"], 0);
                 answerList_.appendChild(answerRow_);
             }
         }, 
@@ -232,7 +240,7 @@ $(document).ready(function() {
 
                 var answerList_ = document.getElementById("answer_list");
                 var rank_ = answerList_.childNodes.length + 1;
-                var answerRow_ = createAnswerElement(rank_, answerId_, answerInput_.value, answerComment.value);
+                var answerRow_ = createAnswerElement(rank_, answerId_, answerInput_.value, answerComment.value, 0);
                 answerList_.appendChild(answerRow_);
 
                 answerInput_.value = "";
