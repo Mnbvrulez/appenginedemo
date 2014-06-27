@@ -20,11 +20,11 @@ handlers:
 
 - url: /api/.*
   script: main.api
-  login: required
+  login: admin
 
 - url: .*
   script: main.app
-  login: required
+  login: admin
 
 libraries:
 - name: webapp2
