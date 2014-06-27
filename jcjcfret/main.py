@@ -55,7 +55,7 @@ class MainHandler(webapp2.RequestHandler):
         questions = models.Question.query()
 
         if question_filter == "top":
-             questions = questions.filter(models.Question.published==True)
+             questions = questions.filter(models.Question.published==True).order(-models.Question.number_votes, models.Question.text)
         elif question_filter == "new":
             questions = questions.filter(models.Question.published==True).order(-models.Question.published_date)
         elif question_filter == "me":
@@ -129,9 +129,7 @@ class AnswerCollection(APIHandler):
             self.response.status = "404 Not Found"
             return
 
-        answers = models.Answer.query().filter(models.Answer.question_key==question.key)
-
-        #TODO: Order answers by votes
+        answers = models.Answer.query().filter(models.Answer.question_key==question.key).order(-models.Answer.number_votes, models.Answer.text)
 
         answer_objects = list()
         for answer in answers:
@@ -216,6 +214,9 @@ class Vote(APIHandler):
             answer_key= answer.key
         )
         vote.put()
+
+        question.number_votes += 1
+        question.put()
 
 
 api = webapp2.WSGIApplication([

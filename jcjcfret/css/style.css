@@ -12,6 +12,10 @@ div {
 }
 */
 
+form.question {
+	width: 70%;
+}
+
 form.answer {
 	width: 70%;
 }

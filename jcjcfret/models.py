@@ -17,6 +17,8 @@ class Question(ndb.Model):
     published = ndb.BooleanProperty(required=True, default=False)
     published_date = ndb.DateTimeProperty(required=False)
 
+    number_votes = ndb.IntegerProperty(required=True, default=0)
+
     @property
     def has_voted(self):
         return Vote.query().filter(Vote.user_key==ndb.Key("UserProfile", users.get_current_user().user_id()), Vote.question_key==self.key).count() > 0
