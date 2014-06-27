@@ -25,9 +25,12 @@ class Answer(ndb.Model):
     comment = ndb.TextProperty(required=False)
     created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)
 
+    number_votes = ndb.ComputedProperty(lambda self: Vote.query().filter(Vote.answer_key==self.key).count())
+
 #Vote
 class Vote(ndb.Model):
     user_key = ndb.KeyProperty(kind=UserProfile, required=True)
-    
-    number = ndb.IntegerProperty(required = True, default =0)
+    question_key = ndb.KeyProperty(kind=Question, required=True)
+    answer_key = ndb.KeyProperty(kind=Answer, required=True)
+
     created_date = ndb.DateTimeProperty(auto_now_add=True, required =True)

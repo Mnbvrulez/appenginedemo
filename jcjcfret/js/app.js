@@ -30,6 +30,9 @@ function createAnswerElement(rank, id, text, comment, votes) {
     answerVote_.textContent = "Vote";
     answerActions_.appendChild(answerVote_);
 
+    if(QUESTION_FILTER == "draft")
+        answerVote_.style.visibility="hidden";
+
     answerVote_.addEventListener('click', function(event) {
 
         $.ajax({
@@ -109,7 +112,7 @@ function selectQuestion() {
             for(var index = 0; index < data.length; index++) {
                 var answer_ = data[index];
 
-                var answerRow_ = createAnswerElement(index+1, answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"], 0);
+                var answerRow_ = createAnswerElement(index+1, answer_["answer_id"], answer_["answer_text"], answer_["answer_comment"], answer_["answer_votes"]);
                 answerList_.appendChild(answerRow_);
             }
         }, 

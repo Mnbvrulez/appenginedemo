@@ -139,6 +139,7 @@ class AnswerCollection(APIHandler):
 
             answer_object = {
                 "answer_id": answer.key.id(),
+                "answer_votes": answer.number_votes,
                 "answer_text": answer.text,
                 "answer_comment": answer.comment
             }
@@ -187,7 +188,35 @@ class QuestionPublish(APIHandler):
 class Vote(APIHandler):
 
      def post(self, question_id, answer_id):
-        pass
+        
+        question_key = ndb.Key("Question", int(question_id))
+        question = question_key.get()
+        if question is None:
+            self.response.status = "404 Not Found"
+            return
+
+        #prevent voting for draft
+        if not question.published:
+            self.response.status = "403 Forbidden"
+            return
+
+        answer_key = ndb.Key("Answer", int(answer_id))
+        answer = answer_key.get()
+        if answer is None:
+            self.response.status = "404 Not Found"
+            return
+
+        votes = models.Vote.query().filter(models.Vote.user_key==self.user_profile.key, models.Vote.question_key==question.key)
+        if votes.count() > 0:
+            self.response.status = "403 Forbidden"
+            return
+
+        vote = models.Vote(
+            user_key= self.user_profile.key,
+            question_key=question.key,
+            answer_key= answer.key
+        )
+        vote.put()
 
 
 api = webapp2.WSGIApplication([
