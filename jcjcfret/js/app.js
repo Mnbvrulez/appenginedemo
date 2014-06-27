@@ -16,7 +16,7 @@ function createAnswerElement(id, text, comment) {
     var answerText_ = document.createElement("td");
     answerText_.textContent = text;
     answerRow_.appendChild(answerText_);
-    
+
 
     var answerActions_ = document.createElement("td");
     answerRow_.appendChild(answerActions_); 
@@ -29,8 +29,22 @@ function createAnswerElement(id, text, comment) {
     answerActions_.appendChild(answerVote_);
 
     answerVote_.addEventListener('click', function(event) { 
+        console.log(id);
+        $.ajax({
+        type: "POST",
+        url: "/api/question/"+SELECTED_QUESTION_ID+"/answer"+id +"/vote",
+        success: function(data, textStatus, jqXHR) {
+            console.log(id);
+            
+            }, 
+        error: function() {
+            console.log("something didn't work");
+            },
+        dataType: "json"
+           }) 
+});
 
-    });
+      
 
 
     var answerComments_ = document.createElement("button");
