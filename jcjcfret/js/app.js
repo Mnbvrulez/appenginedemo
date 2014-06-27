@@ -218,7 +218,6 @@ $(document).ready(function() {
             type: "PUT",
             url: "/api/question/"+SELECTED_QUESTION_ID+"/publish",
             success: function(data, textStatus, jqXHR) {
-
                 /*
                 var answerId_ = data["answer_id"];
 

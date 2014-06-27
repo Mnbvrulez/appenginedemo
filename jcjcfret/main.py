@@ -68,7 +68,8 @@ class MainHandler(webapp2.RequestHandler):
             "logout_url": users.create_logout_url("/"),
             "user_profile": user_profile,
             "question_filter": question_filter,
-            "questions": questions
+            "questions": questions,
+     
         }
 
 
@@ -182,6 +183,11 @@ class QuestionPublish(APIHandler):
         question.published_date = datetime.now()
         question.published = True
         question.put()
+        
+
+
+
+
 
 
 api = webapp2.WSGIApplication([
