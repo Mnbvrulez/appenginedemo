@@ -18,6 +18,7 @@ import jinja2
 import json
 import os
 import webapp2
+from datetime import datetime
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -167,10 +168,28 @@ class AnswerCollection(APIHandler):
         
         self.response.write("{\"answer_id\": \"%i\"}" % answer.key.id())
 
+
+class QuestionPublish(APIHandler):
+
+    def put(self, question_id):
+
+        question_key = ndb.Key("Question", int(question_id))
+        question = question_key.get()
+        if question is None:
+            self.response.status = "404 Not Found"
+            return
+
+        question.published_date = datetime.now()
+        question.published = True
+        question.put()
+
+
 api = webapp2.WSGIApplication([
     ('/api/question', QuestionCreate),
     ('/api/question/([0-9]+)', QuestionDelete),
-    ('/api/question/([0-9]+)/answer', AnswerCollection)
+    ('/api/question/([0-9]+)/answer', AnswerCollection),
+    ('/api/question/([0-9]+)/publish', QuestionPublish)
+
 ], debug=True)
  
              

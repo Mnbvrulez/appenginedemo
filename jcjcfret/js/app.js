@@ -210,6 +210,37 @@ $(document).ready(function() {
 
     });
 
+    $("#publish_question"). click(function(event) {
+
+        console.log("This button works"); 
+
+         $.ajax({
+            type: "PUT",
+            url: "/api/question/"+SELECTED_QUESTION_ID+"/publish",
+            success: function(data, textStatus, jqXHR) {
+
+                /*
+                var answerId_ = data["answer_id"];
+
+                var answerRow_ = createAnswerElement(answerId_, answerInput_.value, answerComment.value);
+                var answerList_ = document.getElementById("answer_list");
+                answerList_.appendChild(answerRow_);
+
+                answerInput_.value = "";
+                answerComment.value = "";
+                answerSubmitButton_.removeAttribute("disabled");
+                answerInput_.removeAttribute("disabled");
+                */
+            },
+            error: function() {
+                console.log("answer submit failed");
+            }
+            //dataType: "json"
+        });
+
+
+    });
+
     //perform first load
     if(SELECTED_QUESTION_ID != null) {
         selectQuestion();
