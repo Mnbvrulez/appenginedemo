@@ -230,6 +230,7 @@ $(document).ready(function() {
                 
                 //do here
                 window.location.replace("/me");
+
             },
             error: function() {
                 console.log("answer submit failed");
