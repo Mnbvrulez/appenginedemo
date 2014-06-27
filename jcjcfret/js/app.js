@@ -51,6 +51,14 @@ function selectQuestion() {
     //set the textContent of the p as the question text
     questionTextElement_.textContent = SELECTED_QUESTION_TEXT;
 
+    //adjust the publish button
+    publishButton = document.getElementById("publish_question");
+    
+    if(QUESTION_FILTER == "draft")
+        publishButton.style.visibility="visible";
+    else
+        publishButton.style.visibility="hidden";
+
     //clean up existing answers
     var answerList_ = document.getElementById("answer_list");
     while (answerList_.firstChild) {
@@ -191,6 +199,7 @@ $(document).ready(function() {
             data: JSON.stringify(answer_),
             success: function(data, textStatus, jqXHR) {
 
+
                 var answerId_ = data["answer_id"];
 
                 var answerRow_ = createAnswerElement(answerId_, answerInput_.value, answerComment.value);
@@ -218,18 +227,9 @@ $(document).ready(function() {
             type: "PUT",
             url: "/api/question/"+SELECTED_QUESTION_ID+"/publish",
             success: function(data, textStatus, jqXHR) {
-                /*
-                var answerId_ = data["answer_id"];
-
-                var answerRow_ = createAnswerElement(answerId_, answerInput_.value, answerComment.value);
-                var answerList_ = document.getElementById("answer_list");
-                answerList_.appendChild(answerRow_);
-
-                answerInput_.value = "";
-                answerComment.value = "";
-                answerSubmitButton_.removeAttribute("disabled");
-                answerInput_.removeAttribute("disabled");
-                */
+                
+                //do here
+                
             },
             error: function() {
                 console.log("answer submit failed");

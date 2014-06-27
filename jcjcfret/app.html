@@ -14,8 +14,7 @@
         var SELECTED_QUESTION_TEXT = null;
         {% else %}
         var SELECTED_QUESTION_ID = "{{questions.get().key.id()}}";
-        var SELECTED_QUESTION_TEXT =  "{{questions.get().text}}";
-        var SELECTED_QUESTION_PUBLISHED = "{{questions.get().published}}"
+        var SELECTED_QUESTION_TEXT = "{{questions.get().text}}";
         {% endif %}
     </script>
     <script src = "/js/app.js"></script>
