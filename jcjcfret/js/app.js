@@ -229,7 +229,7 @@ $(document).ready(function() {
             success: function(data, textStatus, jqXHR) {
                 
                 //do here
-                
+                window.location.replace("/me");
             },
             error: function() {
                 console.log("answer submit failed");
