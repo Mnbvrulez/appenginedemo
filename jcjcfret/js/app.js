@@ -16,6 +16,7 @@ function createAnswerElement(id, text, comment) {
     var answerText_ = document.createElement("td");
     answerText_.textContent = text;
     answerRow_.appendChild(answerText_);
+    
 
     var answerActions_ = document.createElement("td");
     answerRow_.appendChild(answerActions_); 
@@ -23,8 +24,13 @@ function createAnswerElement(id, text, comment) {
     var answerVote_ = document.createElement("button");
     answerVote_.classList.add("btn");
     answerVote_.classList.add("btn-primary");
+    answerVote_.classList.add("vote_btn");
     answerVote_.textContent = "Vote";
     answerActions_.appendChild(answerVote_);
+
+    answerVote_.addEventListener('click', function(event) { 
+
+    });
 
 
     var answerComments_ = document.createElement("button");
@@ -33,11 +39,19 @@ function createAnswerElement(id, text, comment) {
     answerComments_.textContent = "Comments";
     answerActions_.appendChild(answerComments_);
 
+    answerComments_.addEventListener('click', function(event) { 
+        console.log("Comment");
+    });
+
     var answerDelete_ = document.createElement("button");
     answerDelete_.classList.add("btn");
     answerDelete_.classList.add("btn-danger");
     answerDelete_.textContent = "Delete";
     answerActions_.appendChild(answerDelete_);
+
+    answerDelete_.addEventListener('click', function(event) { 
+        console.log("Delete");
+    });
 
 
     return answerRow_;
@@ -240,6 +254,17 @@ $(document).ready(function() {
 
 
     });
+
+    /*
+
+    $("button.vote_btn").click(function(event) {
+
+        console.log("Vote button works"); 
+
+
+    });
+    */
+
 
     //perform first load
     if(SELECTED_QUESTION_ID != null) {

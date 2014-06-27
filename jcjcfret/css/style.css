@@ -12,7 +12,11 @@ div {
 }
 */
 
-form.smaller{
+form.answer {
+	width: 70%;
+}
+
+table.answers{
 	width: 70%;
 }
 
@@ -36,7 +40,6 @@ form.answer h4 {
 div.question_create {
 	margin-bottom: 20px;
 }
+button.vote_btn {
 
-hide {
-	style.visibility = “hidden”;
 }
