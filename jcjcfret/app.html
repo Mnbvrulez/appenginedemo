@@ -12,9 +12,11 @@
         {% if questions.get() is none %}
         var SELECTED_QUESTION_ID = null;
         var SELECTED_QUESTION_TEXT = null;
+        var SELECTED_QUESTION_ANSWERED = "false";
         {% else %}
         var SELECTED_QUESTION_ID = "{{questions.get().key.id()}}";
         var SELECTED_QUESTION_TEXT = "{{questions.get().text}}";
+        var SELECTED_QUESTION_ANSWERED = "{{questions.get().has_voted|lower}}";
         {% endif %}
     </script>
     <script src = "/js/app.js"></script>
@@ -75,7 +77,7 @@
                         {% for question in questions %}
                         <tr>
                             <td>{{question.text}}</td>
-                            <td data-id="{{question.key.id()}}" data-value="{{question.text}}" data-published ="{{questions.get().published}}">
+                            <td data-id="{{question.key.id()}}" data-value="{{question.text}}" data-published ="{{question.published|lower}}" data-has-voted="{{question.has_voted|lower}}">
                                 <button type="button" class="question_select btn btn-default ">Select</button>
                                 <button type="button" class="question_delete btn btn-danger">Delete</button>
                             </td>

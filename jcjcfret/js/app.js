@@ -32,6 +32,8 @@ function createAnswerElement(rank, id, text, comment, votes) {
 
     if(QUESTION_FILTER == "draft")
         answerVote_.style.visibility="hidden";
+    if(SELECTED_QUESTION_ANSWERED == "true")
+        answerVote_.style.visibility="hidden";
 
     answerVote_.addEventListener('click', function(event) {
 
@@ -77,6 +79,8 @@ function createAnswerElement(rank, id, text, comment, votes) {
         console.log("Delete");
     });
 
+    if(QUESTION_FILTER != "draft")
+        answerDelete_.style.visibility="hidden";
 
     return answerRow_;
 };
@@ -187,6 +191,7 @@ $(document).ready(function() {
         //grab the id
         SELECTED_QUESTION_ID = cell_.getAttribute("data-id");
         SELECTED_QUESTION_TEXT = cell_.getAttribute("data-value");
+        SELECTED_QUESTION_ANSWERED = cell_.getAttribute("data-has-voted");
 
         selectQuestion();
     });

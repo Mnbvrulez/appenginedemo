@@ -1,4 +1,5 @@
 from google.appengine.ext import ndb
+from google.appengine.api import users
 
 class UserProfile(ndb.Model):
     user = ndb.UserProperty()
@@ -15,6 +16,10 @@ class Question(ndb.Model):
 
     published = ndb.BooleanProperty(required=True, default=False)
     published_date = ndb.DateTimeProperty(required=False)
+
+    @property
+    def has_voted(self):
+        return Vote.query().filter(Vote.user_key==ndb.Key("UserProfile", users.get_current_user().user_id()), Vote.question_key==self.key).count() > 0
 
 #Answer
 class Answer(ndb.Model):

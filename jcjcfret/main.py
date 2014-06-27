@@ -63,7 +63,6 @@ class MainHandler(webapp2.RequestHandler):
         elif question_filter == "draft":
             questions = questions.filter(models.Question.published==False, models.Question.user_key==user_profile.key).order(-models.Question.created_date)
 
-
         template_values = {
             "logout_url": users.create_logout_url("/"),
             "user_profile": user_profile,
