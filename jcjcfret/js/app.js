@@ -59,79 +59,15 @@ function createAnswerElement(rank, id, text, comment, votes) {
         }) 
     });
 
-
     var answerComments_ = document.createElement("button");
     answerComments_.classList.add("btn");
-    answerComments_.classList.add("btn-primary");
-    answerComments_.setAttribute("data-toggle", "modal");
+    answerComments_.classList.add("btn-default");
     answerComments_.textContent = "Comments";
-    answerComments_.setAttribute("data-target", "#myModal");
     answerActions_.appendChild(answerComments_);
+
     answerComments_.addEventListener('click', function(event) { 
         console.log("Comment");
     });
-
-
-    answerActions_.appendChild(answerComments_);
-    
-    var modalDiv_ = document.createElement("div");
-    modalDiv_.classList.add("modal");
-    modalDiv_.classList.add("fade");
-    modalDiv_.classList.add("bs-example-modal-sm");
-    modalDiv_.setAttribute("id", "myModal");
-    modalDiv_.setAttribute("tabindex", "-1");
-    modalDiv_.setAttribute("role", "dialog");
-    modalDiv_.setAttribute("aria-labelledby", "myModalLabel");
-    modalDiv_.setAttribute("aria-hidden", "true");
-    answerComments_.appendChild(modalDiv_);
-
-    var modalDialogue_ = document.createElement("div");
-    modalDialogue_.classList.add("modal-dialog");
-    modalDiv_.appendChild(modalDialogue_);
-
-    var modalHeader_ = document.createElement("div");
-    modalHeader_.classList.add("modal-header");
-    modalDialogue_.appendChild(modalHeader_);
-
-    var modalLabel_ = document.createElement("h4");
-    modalLabel_.classList.add("modal-title");
-    modalLabel_.setAttribute("id", "myModalLabel");
-    modalHeader_.appendChild(modalLabel_);
-
-    var modalBody_ = document.createElement("div");
-    modalBody_.classList.add("modal-body");
-    modalLabel_.appendChild(modalBody_);
-
-    
-
-
-    
-
-
-
-    /* <!-- Button trigger modal -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> */
 
     var answerDelete_ = document.createElement("button");
     answerDelete_.classList.add("btn");
