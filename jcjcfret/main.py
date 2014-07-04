@@ -30,6 +30,20 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+
+class AccountHandler(webapp2.RequestHandler):
+    def get(self):
+
+        template_values = {
+     
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('account.html')
+        app_markup = template.render(template_values)
+        self.response.write(app_markup)
+
+        
+
 class RedirectHandler(webapp2.RequestHandler):
     def get(self):
         self.redirect("/top")
@@ -79,7 +93,9 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', RedirectHandler),
     ('/(top|new|me|draft)', MainHandler),
+    ('/account', AccountHandler),
 ], debug=True)
+
 
 class APIHandler(webapp2.RequestHandler):
     

@@ -286,6 +286,8 @@ $(document).ready(function() {
 
     });
 
+
+    
     /*
 
     $("button.vote_btn").click(function(event) {
