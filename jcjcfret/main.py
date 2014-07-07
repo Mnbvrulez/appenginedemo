@@ -34,9 +34,28 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class AccountHandler(webapp2.RequestHandler):
     def get(self):
 
+
+
+                      
+        #fetch current user and make a user profile key
+        user = users.get_current_user()
+        user_profile_key = ndb.Key("UserProfile", user.user_id())
+
+        user_profile = user_profile_key.get()
+        #user profile doesn't exist so we will create one
+        if user_profile is None:
+            user_profile = models.UserProfile(
+                key = user_profile_key,
+                user = user
+            )
+
+            user_profile.put()
+
         template_values = {
+            "user_profile": user_profile
      
         }
+        
 
         template = JINJA_ENVIRONMENT.get_template('account.html')
         app_markup = template.render(template_values)
@@ -47,6 +66,9 @@ class AccountHandler(webapp2.RequestHandler):
 class RedirectHandler(webapp2.RequestHandler):
     def get(self):
         self.redirect("/top")
+
+
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self, question_filter):

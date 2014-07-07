@@ -16,8 +16,8 @@
                         <h3>Your Account</h3>
                     </div>
                     <div class="col-md-4">
-                        <div class="account-exit">
-                            <p>Hello:</p>
+                        <div class="account-exit"> 
+                            <p>Hello:{{user_profile.first_name}} {{user_profile.last_name}}</p>
                             <div class="btn-group">
                                 <a href="/top" class="btn btn-default" id="account_button">Home</a>
                                 <a href="{{logout_url}}" class="btn btn-default">Logout</a>
@@ -93,7 +93,6 @@
                     <div class="col-md-8">
                             <h2>Enter Your Details</h2>
                             <form class="answer" role="form">
-                            <h4>Create new answer</h4>
                             <div class="form-group">
                                 <label for="exampleInputEmail1"> First Name</label>
                                 <input id="submit_answer_text"type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Answer">
@@ -107,6 +106,7 @@
                                 <textarea id="submit_comment"class="form-control" rows="3"></textarea>
                             </div>
                             <button id="answer_submit_button" type="button" class="btn btn-primary">Submit</button>
+                            <button id="answer_submit_button" type="button" class="btn btn-default">Upload a Photo</button>
                         </form>
 
                     <tbody id="answer_list">
