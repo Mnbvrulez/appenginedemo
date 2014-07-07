@@ -1,8 +1,146 @@
 <!DOCTYPE html>
 	<html> 
 		<head> 
+            <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css" href="/css/account.css"/>
+            <script src ="/js/jquery-1.11.1.min.js"> </script>
+            <script src ="/js/bootstrap.min.js"> </script>
 		</head>
 		<body>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <h1>rateverything</h1>
+                        <h3>Your Account</h3>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="account-exit">
+                            <p>Hello:</p>
+                            <div class="btn-group">
+                                <a href="/top" class="btn btn-default" id="account_button">Home</a>
+                                <a href="{{logout_url}}" class="btn btn-default">Logout</a>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+                <!--
+    
+                <div class="row">
+                    <div class="col-md-3">
+                        <h3> List of Questions  </h3> 
+                    <div class="btn-group">
+                        {% if question_filter == "top" %}
+                            <a href="/top" class="btn btn-default btn-primary">Top Answered</a>
+                        {% else %}
+                            <a href="/top" class="btn btn-default">Top Answered</a>
+                        {% endif %}
+                        {% if question_filter == "new" %}
+                            <a href="/new" class="btn btn-default btn-primary">Newest</a>
+                        {% else%}
+                            <a href="/new" class="btn btn-default">Newest</a>
+                        {% endif %}
+                        {% if question_filter == "me" %}
+                            <a href="/me" class="btn btn-default btn-primary">My Questions</a>
+                        {%else%}
+                            <a href="/me" class="btn btn-default">My Questions</a>
+                        {% endif %}
+                        {% if question_filter == "draft" %}
+                            <a href="/draft" class="btn btn-default btn-primary">My Drafts</a>
+                        {% else%}
+                            <a href="/draft" class="btn btn-default">My Draft</a>
+                        {% endif %}
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Actions</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody id="question_list">
+                            {% for question in questions %}
+                            <tr>
+                            <td>{{question.text}}</td>
+                            <td data-id="{{question.key.id()}}" data-value="{{question.text}}" data-published ="{{question.published|lower}}" data-has-voted="{{question.has_voted|lower}}">
+                                <button type="button" class="question_select btn btn-default ">Select</button>
+                                <button type="button" class="question_delete btn btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                    <div class="question_create">
+                        <h3> Create a New Question </h3> 
+                        <input id="question_input" type="text" class="form-control" placeholder="New Question Here">
+                        <button id="question_submit_button" type="button" class="btn btn-primary">Submit</button>
+                    </div>
+            </div>
+            <div class="col-md-9">
+                <form class="question" role="form">
+                <h2>Question</h2>
+                <blockquote class="question">
+                    <p id="selected_question_text"></p>
+                    <footer>Author</footer>
+                </blockquote>
+                <button id="publish_question" type="button" class="btn btn-primary">Publish</button>
+                </form>
+
+                <form class="answer" role="form">
+                    <h4>Create new answer</h4>
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Your Answer</label>
+                    <input id="submit_answer_text"type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Answer">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Comment</label>
+                    <textarea id="submit_comment"class="form-control" rows="3"></textarea>
+                  </div>
+                    <button type="button" class="btn btn-primay"><span class="glyphicon glyphicon-floppy-open"></span> </button>
+                    <button id="answer_submit_button" type="button" class="btn btn-primary">Submit</button>
+                </form>
+
+
+
+
+
+                    <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                <input type="text" class="form-control" placeholder="Answer here">
+                
+                <button type="submit" class="btn btn-default">Submit</button>
+                <textarea class="form-control" rows="3"></textarea>
+                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+
+                </div>
+                </form>     
+                <table class="answers table table-striped">
+                    <thead class="answers">
+                        <tr>
+                            <th width="8.5%">Rank</th>
+                            <th width="8.5%">Votes</th>
+                            <th width="20%">Image</th>
+                            <th width="40%">Answer</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="answer_list">
+                   
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+        -->
+
 			<p>Testing? </p>
 		</body>
 	</html>
