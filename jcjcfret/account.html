@@ -25,15 +25,23 @@
                         </div>
                     </div>  
                 </div>
-
-                <!--
-    
                 <div class="row">
-                    <div class="col-md-3">
-                        <h3> List of Questions  </h3> 
-                    <div class="btn-group">
+                    <div class="col-md-4">
+                        <h3> Profile </h3> 
+                        <button id="answer_submit_button" type="button" class="btn btn-primary">Edit </button>
+                            <h5>First Name: </h5>
+                            <h5>Last Name: </h5>
+                            <h5>ID: </h5>
+                            <h5>Email Address: </h5>
+                            <h5>About Me: </h5> 
+                            <h5>Questions Published</h5>
+                            <h5> Answers Published </h5>
+                       
+
+                        <!--
+                        <div class="btn-group">
                         {% if question_filter == "top" %}
-                            <a href="/top" class="btn btn-default btn-primary">Top Answered</a>
+                            <a href="/profile" class="btn btn-default btn-primary">Top Answered</a>
                         {% else %}
                             <a href="/top" class="btn btn-default">Top Answered</a>
                         {% endif %}
@@ -53,6 +61,7 @@
                             <a href="/draft" class="btn btn-default">My Draft</a>
                         {% endif %}
                     </div>
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -80,55 +89,26 @@
                         <button id="question_submit_button" type="button" class="btn btn-primary">Submit</button>
                     </div>
             </div>
-            <div class="col-md-9">
-                <form class="question" role="form">
-                <h2>Question</h2>
-                <blockquote class="question">
-                    <p id="selected_question_text"></p>
-                    <footer>Author</footer>
-                </blockquote>
-                <button id="publish_question" type="button" class="btn btn-primary">Publish</button>
-                </form>
+        -->         </div>
+                    <div class="col-md-8">
+                            <h2>Enter Your Details</h2>
+                            <form class="answer" role="form">
+                            <h4>Create new answer</h4>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> First Name</label>
+                                <input id="submit_answer_text"type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Answer">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> Last Name</label>
+                                <input id="submit_answer_text"type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Answer">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"> Tell us about yourself</label>
+                                <textarea id="submit_comment"class="form-control" rows="3"></textarea>
+                            </div>
+                            <button id="answer_submit_button" type="button" class="btn btn-primary">Submit</button>
+                        </form>
 
-                <form class="answer" role="form">
-                    <h4>Create new answer</h4>
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">Your Answer</label>
-                    <input id="submit_answer_text"type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Answer">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Comment</label>
-                    <textarea id="submit_comment"class="form-control" rows="3"></textarea>
-                  </div>
-                    <button type="button" class="btn btn-primay"><span class="glyphicon glyphicon-floppy-open"></span> </button>
-                    <button id="answer_submit_button" type="button" class="btn btn-primary">Submit</button>
-                </form>
-
-
-
-
-
-                    <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                <input type="text" class="form-control" placeholder="Answer here">
-                
-                <button type="submit" class="btn btn-default">Submit</button>
-                <textarea class="form-control" rows="3"></textarea>
-                <button type="button" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-primary">Submit</button>
-
-                </div>
-                </form>     
-                <table class="answers table table-striped">
-                    <thead class="answers">
-                        <tr>
-                            <th width="8.5%">Rank</th>
-                            <th width="8.5%">Votes</th>
-                            <th width="20%">Image</th>
-                            <th width="40%">Answer</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
                     <tbody id="answer_list">
                    
                     </tbody>
@@ -139,8 +119,6 @@
         </div>
     </div>
 
-        -->
-
-			<p>Testing? </p>
+    
 		</body>
 	</html>
