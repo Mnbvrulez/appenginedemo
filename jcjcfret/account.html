@@ -5,6 +5,7 @@
             <link rel="stylesheet" type="text/css" href="/css/account.css"/>
             <script src ="/js/jquery-1.11.1.min.js"> </script>
             <script src ="/js/bootstrap.min.js"> </script>
+            <script src = "/js/account.js"></script>
 		</head>
 		<body>
             <div class="container-fluid">
@@ -28,14 +29,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h3> Profile </h3> 
-                        <button id="answer_submit_button" type="button" class="btn btn-primary">Edit </button>
-                            <h5>First Name: </h5>
-                            <h5>Last Name: </h5>
+                            <h5>First Name: {{user_profile.first_name}} </h5>
+                            <h5>Last Name: {{user_profile.last_name}}</h5>
                             <h5>ID: </h5>
                             <h5>Email Address: </h5>
                             <h5>About Me: </h5> 
                             <h5>Questions Published</h5>
                             <h5> Answers Published </h5>
+
+                        <button id="account_edit_button" type="button" class="btn btn-primary">Edit </button>
                        
 
                         <!--
@@ -91,8 +93,9 @@
             </div>
         -->         </div>
                     <div class="col-md-8">
+                            
+                        <form class="answer" id ="edit_profile" role="form">
                             <h2>Enter Your Details</h2>
-                            <form class="answer" role="form">
                             <div class="form-group">
                                 <label for="exampleInputEmail1"> First Name</label>
                                 <input id="submit_answer_text"type="email" class="form-control" id="exampleInputEmail1" placeholder="Your Answer">
